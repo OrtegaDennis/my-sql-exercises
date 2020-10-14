@@ -48,38 +48,76 @@ use gravel_family;
 -- If you solved the previous task without `between`, use `between`.
 -- If you used `between`, solve it with `and`.
 -- Expected: 100 Rows, 3 columns
-select last_name,
-email_address,
-customer_since
-from customer
-where (customer_since > '2019-01-01') and (customer_since < '2019-12-31');
+-- select last_name,
+-- email_address,
+-- customer_since
+-- from customer
+-- where (customer_since > '2019-01-01') and (customer_since < '2019-12-31');
 
 -- Find 2019 customers a third time, but this time sort them by customer_since descending.
 -- Expected: 100 Rows, 3 columns
+-- select last_name,
+-- email_address,
+-- customer_since
+-- from customer
+-- where (customer_since > '2019-01-01') and (customer_since < '2019-12-31')
+-- order by customer_since desc;
 
 -- Select first_name, last_name, phone, and address from customer.
 -- Sort by last_name descending and first_name ascending.
 -- Expected: 1000 Rows, 4 columns
+-- select first_name,
+-- 	last_name,
+-- 	phone,
+-- 	address 
+-- from customer
+-- order by last_name desc, first_name asc;
 
 -- Which customer city comes last in the alphabet?
 -- Expected: Woodstock
+-- select city
+-- from customer
+-- order by city desc
+-- limit 1;
 
 -- Select last_name, address, and city from customers
 -- where cities are 'Toronto', 'Brampton', or 'Mississauga'.
 -- Expected: 34 Rows, 3 columns
+-- select last_name,
+-- 	address,
+-- 	city
+-- from customer
+-- where city in ('Toronto', 'Brampton' ,'Mississauga');
 
 -- If you solved the previous task without `in`, use `in`.
 -- If you used `in`, solve it with `or` conditions.
 -- Expected: 34 Rows, 3 columns
+-- select last_name,
+-- 	address,
+-- 	city
+-- from customer
+-- where city = 'Toronto' or city ='Brampton' or city = 'Mississauga';
 
 -- Find customers who don't live in postal_codes: M3H, K7R, L2V, K7S, or J6A
 -- Expected: 874 Rows
+-- select last_name,
+-- 	address,
+-- 	city
+-- from customer
+-- where postal_code not in ('M3H', 'K7R', 'L2V', 'K7S', 'J6A');
+
 
 -- Find customer whose last name starts with 'M'.
 -- Expected: 76 Rows
+-- select last_name
+-- from customer
+-- where last_name like 'm%'
 
 -- Find customers with a `(952)` phone area code.
 -- Expected: 5 Rows.
+-- select phone
+-- from customer
+-- where phone like '(952)%';
 
 -- Find customers with a '.com' email_address
 -- Expected: 599 Rows.
