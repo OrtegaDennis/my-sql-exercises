@@ -181,24 +181,37 @@ use gravel_family;
 -- regardless of if they have a project or Fleur worked on it.
 -- Though something should indicate if Fleur was on a M3H project.
 -- Expected: 48 Rows, 3 projects that Fleur worked on.
-select c.first_name,
-c.last_name,
-e.last_name as employee_last_name
-from customer c
-left outer join project p on p.customer_id = c.customer_id
-left outer join project_employee pe on pe.project_id = p.project_id
-left outer join employee e on e.employee_id = pe.employee_id
-where c.postal_code = 'M3H' or e.last_name = 'Fleur'
-order by e.last_name desc;
+-- select c.first_name,
+-- c.last_name,
+-- e.last_name as employee_last_name,
+-- c.postal_code,
+-- p.project_id
+-- from employee e
+-- inner join project_employee pe on pe.employee_id = e.employee_id
+-- inner join project p on p.project_id = pe.project_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- where c.postal_code = 'M3H' and e.last_name = 'Soyle'
+-- order by c.last_name desc; 
+
 
 
 
 -- Find customers without logins using a `right outer` join.
 -- Expected: 341 Rows
+-- select c.first_name,
+-- c.last_name,
+-- l.user_name
+-- from login l
+-- right outer join customer c on c.customer_id = l.customer_id
+-- where l.customer_id is null;
 
 -- List category with its parent category, but make the parent category
 -- optional to include categories without a parent.
 -- Expected: 8 Rows
+-- select c.name,
+-- c.parent_category_id
+-- from category c;
+
 
 -- Write an "everything" query:
 -- customer_id and names from customer
@@ -209,3 +222,18 @@ order by e.last_name desc;
 -- name from unit
 -- for customers in the 'L3K' postal_code.
 -- Expected: 39 Rows
+-- select c.customer_id,
+-- c.first_name,
+-- c.last_name,
+-- p.description,
+-- pi.quantity,
+-- i.name as item_name,
+-- ca.name as category_name,
+-- u.name as unit_name
+-- from customer c
+-- inner join project p on p.customer_id = c.customer_id
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join category ca on ca.category_id = i.category_id
+-- inner join unit u on u.unit_id = i.unit_id
+-- where c.postal_code = 'L3K';
