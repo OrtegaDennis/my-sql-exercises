@@ -8,40 +8,70 @@ use gravel_family;
 -- Select first_name and last_name from customer,
 -- user_name from login where rows from both tables are required.
 -- Expected: 659 Rows
-select
-	c.first_name,
-    c.last_name,
-    l.user_name
-from customer c
-inner join login l on c.customer_id = l.customer_id;
+-- select
+-- 	c.first_name,
+--     c.last_name,
+--     l.user_name
+-- from customer c
+-- inner join login l on c.customer_id = l.customer_id;
 
 -- Select first_name and last_name from customer,
 -- user_name from login where rows from both tables are required.
 -- Sort by user_name descending.
 -- Expected: 659 Rows
+-- select c.first_name,
+-- 	c.last_name,
+--     l.user_name
+-- from customer c
+-- inner join login l on l.customer_id = c.customer_id
+-- order by l.user_name desc;
+
 
 -- Select first_name and last_name from customer,
 -- user_name from login where rows from both tables are required.
 -- Only customers whose last name starts with 'W'.
 -- Sort by user_name descending.
 -- Expected: 24 Rows
+-- select c.first_name,
+-- 	c.last_name,
+--     l.user_name
+-- from customer c
+-- inner join login l on l.customer_id = c.customer_id
+-- where c.last_name like 'W%'
+-- order by l.user_name desc;
 
 -- Join item and category. Select the item name and category name.
 -- Expected: 19 Rows
+-- select i.name as item_name,
+-- 		c.name as category_name
+-- from item i
+-- inner join category c on c.category_id = i.category_id;
 
 -- Join item and category. Select the item name and category name.
 -- Create an alias for each column: item_name and category_name
 -- Sort by the category_name, then item_name.
 -- Expected: 19 Rows
+-- select i.name as item_name,
+-- 		c.name as category_name
+-- from item i
+-- inner join category c on c.category_id = i.category_id
+-- order by category_name, item_name;
 
 -- Select name and price_per_unit from item,
 -- name from unit. Make rows from both tables required.
 -- Add column aliases to avoid confusion from two `name` columns.
 -- Expected: 19 Rows
+-- select i.name as item_name,
+-- 		i.price_per_unit, 
+--         u.name as unit_name
+-- from item i
+-- inner join unit u on u.unit_id = i.unit_id;
+
 
 -- Select all columns from item, category, and unit.
 -- Make all rows required.
 -- Expected: 19 Rows
+
 
 -- Select first_name, last_name from customer,
 -- select description from project,
