@@ -71,6 +71,10 @@ use gravel_family;
 -- Select all columns from item, category, and unit.
 -- Make all rows required.
 -- Expected: 19 Rows
+-- select i.*
+-- from item i
+-- left outer join category c on c.category_id = i.category_id
+-- left outer join unit u on u.unit_id = i.unit_id;
 
 
 -- Select first_name, last_name from customer,
@@ -79,25 +83,68 @@ use gravel_family;
 -- If a customer doesn't have a project, still include them.
 -- (Hint: left outer join)
 -- Expected: 228 Rows
+-- select c.first_name,
+-- c.last_name,
+-- p.description
+-- from customer c
+-- left outer join project p on p.customer_id = c.customer_id
+-- where c.last_name like 'B%' or c.last_name like 'D%';
+
 
 -- Find all customers who do not have a project.
 -- Expected: 195 Rows
+-- select c.first_name,
+-- c.last_name,
+-- p.description
+-- from customer c
+-- left outer join project p on p.customer_id = c.customer_id
+-- where p.customer_id is null;
 
 -- Find all customers who do not have a login.
 -- Expected: 341 Rows
+-- select c.first_name,
+-- c.last_name,
+-- l.user_name
+-- from customer c
+-- left outer join login l on l.customer_id = c.customer_id
+-- where l.customer_id is null;
 
 -- Find all employees who are not assigned to a project.
 -- Expected: 0 Rows
+-- select e.first_name,
+-- e.last_name,
+-- p.project_id
+-- from employee e
+-- left outer join project_employee p on p.employee_id = e.employee_id
+-- where p.employee_id is null;
 
 -- Select employee_id, first_name, and last_name from employee,
 -- project_id and description from project
 -- where the employee last_name equals `Gravel`.
 -- Expected: 958 Rows
+-- select e.employee_id,
+-- e.first_name,
+-- e.last_name,
+-- p.project_id,
+-- p.description
+-- from employee e
+-- inner join project_employee pe on pe.employee_id = e.employee_id
+-- inner join project p on p.project_id = pe.project_id
+-- where e.last_name = 'Gravel';
 
 -- Which employees worked on a project for the customer
 -- with last_name equal to 'Rao'?
 -- Expected: Itch Gravel, Alang Durt, Ynez Durt, Ddene Soyle,
 -- Mychal Soyle, Hugo Durt
+-- select e.employee_id,
+-- e.first_name,
+-- e.last_name,
+-- p.project_id
+-- from employee e
+-- inner join project_employee pe on pe.employee_id = e.employee_id
+-- inner join project p on p.project_id = pe.project_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- where c.last_name = 'Rao';
 
 -- Find employees and projects for projects in 2017.
 -- Select project_id from project and names from employee.
