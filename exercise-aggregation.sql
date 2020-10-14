@@ -84,10 +84,18 @@ use gravel_family;
 
 -- Count the number of projects per start_date year.
 -- Expected: 4 Rows
+-- select count(project_id)
+-- from project
+-- group by year(start_date);
+
 
 -- Count the number of employees per project in the M3H postal_code.
 -- Group by project_id, sort by count descending.
 -- Expected: 39 Rows
+
+
+
+
 
 -- Calculate the total cost per project in the 'M3H' postal_code.
 -- (Hint: sum a calculation)
