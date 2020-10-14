@@ -48,11 +48,11 @@ use gravel_family;
 -- If you solved the previous task without `between`, use `between`.
 -- If you used `between`, solve it with `and`.
 -- Expected: 100 Rows, 3 columns
--- select last_name,
--- email_address,
--- customer_since
--- from customer
--- where (customer_since > '2019-01-01') and (customer_since < '2019-12-31');
+select last_name,
+email_address,
+customer_since
+from customer
+where (customer_since > '2019-01-01') and (customer_since < '2019-12-31');
 
 -- Find 2019 customers a third time, but this time sort them by customer_since descending.
 -- Expected: 100 Rows, 3 columns
