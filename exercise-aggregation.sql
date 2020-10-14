@@ -47,19 +47,40 @@ use gravel_family;
 
 -- Count employees per last_name.
 -- Expected: 3 Rows
-select count(employee_id)
-from employee
-group by last_name;
+-- select count(employee_id)
+-- from employee
+-- group by last_name;
 
 -- Count the number of projects per city.
 -- Expected: 88 Rows
+-- select c.city,
+-- count(p.project_id)
+-- from project p 
+-- inner join customer c on c.customer_id = p.customer_id
+-- group by c.city;
 
 -- Count the number of projects per city.
 -- Sort by the count descending and select the top 10 rows.
 -- Expected: 10 Rows
+-- select c.city,
+-- count(p.project_id)
+-- from project p 
+-- inner join customer c on c.customer_id = p.customer_id
+-- group by c.city
+-- order by c.city desc
+-- limit 10;
+
+
 
 -- Which postal_code has the most projects?
 -- Expected: M3H
+-- select c.postal_code,
+-- count(p.project_id)
+-- from project p 
+-- inner join customer c on c.customer_id = p.customer_id
+-- group by c.postal_code
+-- order by count(p.project_id) desc
+-- limit 1;
 
 -- Count the number of projects per start_date year.
 -- Expected: 4 Rows
