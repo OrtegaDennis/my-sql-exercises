@@ -92,40 +92,107 @@ use gravel_family;
 -- Count the number of employees per project in the M3H postal_code.
 -- Group by project_id, sort by count descending.
 -- Expected: 39 Rows
-
-
-
-
+-- select count(e.employee_id)
+-- from employee e
+-- inner join project_employee pe on pe.employee_id = e.employee_id
+-- inner join project p on p.project_id = pe.project_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- where c.postal_code = 'M3H'
+-- group by p.project_id;
 
 -- Calculate the total cost per project in the 'M3H' postal_code.
 -- (Hint: sum a calculation)
 -- Expected: 39 Rows
+-- select sum(pi.quantity * i.price_per_unit)
+-- from project p
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- where c.postal_code = 'M3H'
+-- group by p.project_id;
+
 
 -- What's the most expensive project in the 'M3H' postal_code?
 -- Expected: 18828.00
+-- select sum(pi.quantity * i.price_per_unit)
+-- from project p
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- where c.postal_code = 'M3H'
+-- group by p.project_id
+-- order by sum(pi.quantity * i.price_per_unit) desc
+-- limit 1;
 
 -- How many projects did each employee work on?
 -- Expected: 33 Rows
+-- select count(p.project_id)
+-- from project_employee p
+-- inner join employee e on e.employee_id = p.employee_id
+-- group by p.employee_id;
 
 -- How many employees worked on more than 140 projects?
 -- Expected: 10 Rows
+-- select count(p.project_id)
+-- from project_employee p
+-- inner join employee e on e.employee_id = p.employee_id
+-- group by p.employee_id
+-- having count(p.project_id) > 140;
 
 -- How many projects cost more than $20,000?
 -- Expected: 55 Rows
+-- select sum(pi.quantity * i.price_per_unit)
+-- from project p
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- group by p.project_id
+-- having sum(pi.quantity * i.price_per_unit) > 20000;
 
 -- Across all projects, what are the total costs per item?
 -- Select the item name and sum.
 -- Sort by the sum desc;
 -- Expected: 18 Rows
+-- select i.name,
+-- sum(pi.quantity * i.price_per_unit) as total_per_item
+-- from project p
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- group by i.item_id;
 
 -- Across all projects, what are the total costs per item category?
 -- Select the category name and sum.
 -- Sort by the sum desc;
 -- Expected: 7 Rows
+-- select ca.name,
+-- sum(pi.quantity * i.price_per_unit) as total_per_category
+-- from project p
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- inner join category ca on ca.category_id = i.category_id
+-- group by ca.category_id;
 
 -- What's the average 'Standard Labor' cost per city?
 -- Expected: 88 Rows
+-- select c.city,
+-- avg(pi.quantity * i.price_per_unit) as avg_cost
+-- from project p
+-- inner join project_item pi on pi.project_id = p.project_id
+-- inner join item i on i.item_id = pi.item_id
+-- inner join customer c on c.customer_id = p.customer_id
+-- inner join category ca on ca.category_id = i.category_id
+-- where ca.name = 'Labor'
+-- group by c.city;
 
 -- Challenge: Which customer has the first project of 2019?
 -- (Requires a subquery.)
 -- Expected: Starkie 2019-01-01
+-- select c.first_name,
+-- c.last_name,
+-- p.start_date
+-- from customer c
+-- inner join project p on p.customer_id = c.customer_id
+-- where year(p.start_date) = 2019
+-- order by p.start_date;
